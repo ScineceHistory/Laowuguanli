@@ -22,6 +22,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,6 +44,7 @@ import zjut.com.laowuguanli.MyApplication;
 import zjut.com.laowuguanli.R;
 import zjut.com.laowuguanli.animation.AlphaInAnimation;
 import zjut.com.laowuguanli.animation.SlideInLeftAnimation;
+import zjut.com.laowuguanli.dialog.InputPasswordDialog;
 import zjut.com.laowuguanli.fragment.ImageFragment;
 import zjut.com.laowuguanli.util.Check;
 import zjut.com.laowuguanli.util.Constants;
@@ -177,8 +179,8 @@ public class MainActivity extends BaseActivity {
         fabLaowu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(MainActivity.this,LaowuActivity.class));
+                showInputPasswordDialog(LaowuActivity.class);
+                //startActivity(new Intent(MainActivity.this,LaowuActivity.class));
             }
         });
 
@@ -186,7 +188,7 @@ public class MainActivity extends BaseActivity {
         fabWeigui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,WeiguiActivity.class));
+                showInputPasswordDialog(WeiguiActivity.class);
             }
         });
 
@@ -214,6 +216,56 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+    }
+
+
+    /**
+     * 弹出输入密码的对话框
+     */
+    private void showInputPasswordDialog(final Class cls) {
+        final String password = getPassword();
+        final InputPasswordDialog inputPasswordDialog = new InputPasswordDialog(MainActivity.this);
+
+        inputPasswordDialog.setCallBack(new InputPasswordDialog.MyCallBack() {
+            @Override
+            public void confirm() {
+                if (TextUtils.isEmpty(inputPasswordDialog.mInputPassWordEt.getText().toString())) {
+                    showHintInfo("密码不能为空");
+                } else {
+                    assert password != null;
+                    if (password.equals(inputPasswordDialog.mInputPassWordEt.getText().toString())) {
+                        //进入防盗主界面
+                        inputPasswordDialog.dismiss();
+                        startActivity(new Intent(MainActivity.this,cls));
+                    } else {
+                        //对话框消失，弹出密码有误提示
+                        inputPasswordDialog.dismiss();
+                        showHintInfo("密码有误，请重新输入");
+                    }
+                }
+            }
+
+            @Override
+            public void cancel() {
+                inputPasswordDialog.dismiss();
+            }
+        });
+
+        //让对话框显示
+        inputPasswordDialog.show();
+        inputPasswordDialog.setCancelable(true);
+        showHintInfo("密码为登陆时的密码");
+    }
+
+    /**
+     * 获取密码
+     */
+    private String getPassword() {
+        String password = preferences.getString("password",null);
+        if (TextUtils.isEmpty(password)) {
+            return "";
+        }
+        return password;
     }
 
     @SuppressLint("DefaultLocale")
@@ -464,9 +516,16 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                        intent.putExtra("re_login",true);
                         startActivity(intent);
                     }
                 })
+                .show();
+    }
+
+    private void showHintInfo(String leftStr) {
+        Snackbar.make(parentLayout,leftStr,Snackbar.LENGTH_LONG)
+                .setActionTextColor(getResources().getColor(R.color.colorAccent))
                 .show();
     }
 

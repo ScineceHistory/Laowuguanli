@@ -15,6 +15,7 @@
 
 
     <color name="primary">#607D8B</color>
+    <color name="loading">#55607D8B</color>
     <color name="primary_dark">#607D8B</color>
     <color name="primary_darker">#455A64</color>
     <color name="accent">#FFFFFF</color>

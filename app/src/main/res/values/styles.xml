@@ -38,9 +38,18 @@
         <item name="android:colorButtonNormal" tools:ignore="NewApi">@color/primary_darker</item>
     </style>
 
-    <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
+    <style name="AppTheme.Dark.Dialog" parent="Base.V7.Theme.AppCompat.Dialog">
         <item name="colorAccent">@color/white</item>
         <item name="android:textColorPrimary">@color/iron</item>
         <item name="android:background">@color/primary</item>
     </style>
+
+    <style name="dialog_custom" parent="@android:style/Theme.Dialog">
+        <!-- Customize your theme here. -->
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

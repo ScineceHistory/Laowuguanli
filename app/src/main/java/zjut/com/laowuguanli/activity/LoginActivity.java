@@ -1,10 +1,11 @@
 package zjut.com.laowuguanli.activity;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -78,7 +79,6 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-
         _signupLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,24 +148,40 @@ public class LoginActivity extends BaseActivity {
 
         _loginButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+        View view = getLayoutInflater().inflate(R.layout.loading_progress_dialog,null);
+        TextView loadTv = (TextView) view.findViewById(R.id.load_text);
+        loadTv.setText("认证中");
+        Button loadBtn = (Button) view.findViewById(R.id.cancel_loading);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("认证中...");
+        builder.setView(view);
+        final AlertDialog progressDialog = builder.create();
+
+        final Handler mHandler = new android.os.Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                // On complete call either onLoginSuccess or onLoginFailed
+                onLoginSuccess();
+                // onLoginFailed();
+                progressDialog.dismiss();
+                finish();
+            }
+        };
+
         progressDialog.show();
+        loadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog.dismiss();
+                mHandler.removeMessages(0x111);
+                _loginButton.setEnabled(true);
+            }
+        });
+
+        mHandler.sendEmptyMessageDelayed(0x111,2000);
 
         // TODO: Implement your own authentication logic here.
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
-                        finish();
-                    }
-                }, 2000);
     }
 
 
