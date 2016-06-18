@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="zjut.com.laowuguanli">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <!-- TODO replace above two with next line after Android 4.2 -->
+    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.screen.landscape"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.wifi"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icon_qr"
+        android:label="@string/app_name"
+        android:name=".MyApplication"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.MainActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activity.ScanActivity"
+                  android:theme="@style/AppThemeS"
+            android:label="扫码"/>
+        <activity android:name=".activity.UserInfoActivity"
+            android:theme="@style/AppThemeU"/>
+
+        <activity android:name=".activity.LaowuActivity"
+                  android:theme="@style/AppThemeL"/>
+        <activity android:name=".activity.QianzhengActivity"
+                  android:theme="@style/AppThemeQ"/>
+        <activity android:name=".activity.WeiguiActivity"
+                  android:theme="@style/AppThemeW"/>
+
+        <activity android:name=".activity.LoginActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name=".activity.SignupActivity" android:theme="@style/AppTheme.Dark" />
+
+        <activity android:name=".activity.PrefsActivity"
+            android:theme="@style/AppThemeP"/>
+
+    </application>
+
+</manifest>

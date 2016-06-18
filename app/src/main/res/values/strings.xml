@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">劳务管理</string>
+    <string name="title_activity_test">Test</string>
+
+    <string name="licences_header">劳务管理软件信息</string>
+    <string name="me">\@ScienceHistory</string>
+    <string name="show_time">显示时间</string>
+    <string name="hide_time">隐藏时间</string>
+</resources>

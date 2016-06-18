@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/nav_web"
+            android:icon="@drawable/ic_web"
+            android:title="公司主页"/>
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="个人微博"/>
+
+        <item
+            android:id="@+id/nav_relogin"
+            android:checkable="true"
+            android:icon="@drawable/ic_relogin"
+            android:title="切换账号"/>
+
+    </group>
+
+    <item
+        android:id="@+id/navigation_sub"
+        android:title="其他功能">
+        <menu>
+
+            <item
+                android:id="@+id/nav_about"
+                android:checkable="true"
+                android:icon="@drawable/ic_about"
+                android:title="关于"/>
+
+            <item
+                android:id="@+id/nav_settings"
+                android:checkable="true"
+                android:icon="@drawable/ic_settings"
+                android:title="设置"/>
+
+            <item
+                android:id="@+id/nav_share"
+                android:checkable="true"
+                android:icon="@drawable/abc_ic_menu_share_mtrl_alpha"
+                android:title="分享"/>
+
+            <item
+                android:id="@+id/nav_exit"
+                android:checkable="true"
+                android:icon="@drawable/ic_power_settings_new_black_36dp"
+                android:title="退出"/>
+
+
+        </menu>
+    </item>
+
+</menu>
