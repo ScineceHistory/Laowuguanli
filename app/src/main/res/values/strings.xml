@@ -6,4 +6,6 @@
     <string name="me">\@ScienceHistory</string>
     <string name="show_time">显示时间</string>
     <string name="hide_time">隐藏时间</string>
+    <string name="weigui_type">"迟到", "早退", "上班喝酒", "不听指挥", "不戴安全帽", "不按规程操作"</string>
+
 </resources>

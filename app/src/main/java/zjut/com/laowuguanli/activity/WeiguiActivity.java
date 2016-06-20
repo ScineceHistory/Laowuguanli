@@ -6,14 +6,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -28,7 +25,6 @@ import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import zjut.com.laowuguanli.R;
 import zjut.com.laowuguanli.adapter.MyAdapterW;
@@ -36,30 +32,17 @@ import zjut.com.laowuguanli.bean.User;
 import zjut.com.laowuguanli.db.LoaderDaoImplw;
 import zjut.com.laowuguanli.util.GetUserTaskW;
 
-public class WeiguiActivity extends BaseActivity {
+public class WeiguiActivity extends AdministerActivity {
 
-    RecyclerView recyclerView;
-    List<User> datas;
     MyAdapterW adapter;
-    private FloatingActionButton fab;
-    ProgressDialog progressDialog;
     LoaderDaoImplw mDao;
-    List<User> users;
-    public boolean isOut = false;
     MaterialSpinner spinner;
     String weiguiInfo = "迟到";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_weigui);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("违规管理");
-
-        initViews();
         initMenu();
 
         users = mDao.getUsers();
@@ -69,7 +52,16 @@ public class WeiguiActivity extends BaseActivity {
         }
     }
 
-    private void initViews() {
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_weigui;
+    }
+
+    @Override
+    protected void initViews() {
+
+        titleName = "违规管理";
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(WeiguiActivity.this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -211,7 +203,7 @@ public class WeiguiActivity extends BaseActivity {
 
     private void initMenu() {
         spinner = (MaterialSpinner) findViewById(R.id.spinner);
-        spinner.setItems("迟到", "早退", "上班喝酒", "不听指挥", "不戴安全帽", "不按规程操作");
+        spinner.setItems(getResources().getString(R.string.weigui_type));
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
@@ -238,21 +230,5 @@ public class WeiguiActivity extends BaseActivity {
                 }
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void showHintInfo(String info) {
-        Snackbar.make(recyclerView,info,Snackbar.LENGTH_LONG)
-                .show();
     }
 }

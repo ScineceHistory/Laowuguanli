@@ -14,9 +14,6 @@ import zjut.com.laowuguanli.bean.User;
 import zjut.com.laowuguanli.db.LoaderDaoImpl;
 
 
-/**
- * Created by ScienceHistory on 16/5/16.
- */
 public class GetUserTaskQ extends AsyncTask<String, Void, User> {
     QianzhengActivity mContext;
     LoaderDaoImpl mDao;

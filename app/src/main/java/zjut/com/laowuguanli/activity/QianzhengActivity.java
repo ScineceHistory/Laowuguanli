@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -25,7 +22,6 @@ import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import zjut.com.laowuguanli.R;
 import zjut.com.laowuguanli.adapter.MyAdapterQ;
@@ -34,37 +30,24 @@ import zjut.com.laowuguanli.db.LoaderDaoImplq;
 import zjut.com.laowuguanli.util.GetUserTaskQ;
 
 
-public class QianzhengActivity extends BaseActivity {
-    RecyclerView recyclerView;
-    List<User> datas;
-    MyAdapterQ adapter;
-    ProgressDialog progressDialog;
-    LoaderDaoImplq mDao;
-    List<User> users;
-    List<User> mUsers = new ArrayList<>();
-    private FloatingActionButton fab;
-    //int cnt;
-    boolean isOut = false;
+public class QianzhengActivity extends AdministerActivity {
 
+    MyAdapterQ adapter;
+    LoaderDaoImplq mDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_qianzheng);
-
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("签证管理");
-        initViews();
-
         users = mDao.getUsers();
         if (users != null) {
             datas.addAll(users);
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_qianzheng;
     }
 
     private void save1(final User user) {
@@ -117,7 +100,10 @@ public class QianzhengActivity extends BaseActivity {
         }).start();
     }
 
-    private void initViews() {
+    @Override
+    protected void initViews() {
+
+        titleName = "签证管理";
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(QianzhengActivity.this));
@@ -189,36 +175,5 @@ public class QianzhengActivity extends BaseActivity {
         }
         adapter.notifyDataSetChanged();
         hiddenDialog();
-    }
-
-    public void showDialog() {
-        progressDialog.show();
-    }
-
-    public void hiddenDialog() {
-        progressDialog.dismiss();
-    }
-
-    private void showHintInfo(String info) {
-        Snackbar.make(recyclerView,info,Snackbar.LENGTH_LONG)
-                .show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        //users = mDao.getUsers();
-        //save(users);
-        super.onDestroy();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

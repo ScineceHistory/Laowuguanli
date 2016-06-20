@@ -20,7 +20,7 @@ public final class MyApplication extends Application {
         applicationContext = this;
         // 设置全局字体
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/MILT_RG.ttf").setFontAttrId(R.attr.fontPath).build());
+                .setDefaultFontPath("fonts/wdcyj.ttf").setFontAttrId(R.attr.fontPath).build());
 
     }
 

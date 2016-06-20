@@ -1,5 +1,6 @@
 package zjut.com.laowuguanli.adapter;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -7,12 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.TextView;
 
 import java.util.List;
 
 import zjut.com.laowuguanli.R;
 import zjut.com.laowuguanli.activity.UserInfoActivity;
+import zjut.com.laowuguanli.animation.ScaleInAnimator;
 import zjut.com.laowuguanli.bean.User;
 
 /**
@@ -22,24 +26,13 @@ import zjut.com.laowuguanli.bean.User;
 public class MyAdapterQ extends RecyclerView.Adapter<MyAdapterQ.ViewHolder> {
 
     Context mContext;
-
-//    LoaderDaoImpl mLoaderDao;
-
+    private int mDuration = 700;
+    private Interpolator mInterpolator = new AnticipateOvershootInterpolator();
     List<User> mDatas;
-//    public interface OnItemClickListener {
-//        void onItemLongClickListener(View itemView, int position);
-//    }
-//    public OnItemClickListener mListener;
-//
-//    public void setOnItemClickListener(OnItemClickListener listener) {
-//        this.mListener = listener;
-//    }
-
 
     public MyAdapterQ(Context context, List<User> list) {
         mContext = context;
         mDatas = list;
- //       mLoaderDao = new LoaderDaoImpl(context);
     }
 
     @Override
@@ -59,24 +52,13 @@ public class MyAdapterQ extends RecyclerView.Adapter<MyAdapterQ.ViewHolder> {
 
         holder.tv_num.setText((position+1)+". "+split[0]);
 
-//        if (mListener != null) {
-//            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View v) {
-//                    mListener.onItemLongClickListener(holder.itemView,holder.getLayoutPosition());
-//                    return true;
-//                }
-//            });
-//        }
-    }
 
-//    public void deleteItem(int pos) {
-//        Log.d("SH", ""+pos);
-//        mLoaderDao.deleteUser(mDatas.get(pos).getName(),
-//                mDatas.get(pos).getDate());
-//        mDatas.remove(pos);
-//        notifyItemRemoved(pos);
-//    }
+        ScaleInAnimator animation = new ScaleInAnimator();
+        for (Animator anim : animation.getAnimators(holder.itemView)) {
+            anim.setInterpolator(mInterpolator);
+            anim.setDuration(mDuration).start();
+        }
+    }
 
     @Override
     public int getItemCount() {

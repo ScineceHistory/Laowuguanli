@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zjut.com.laowuguanli.R;
-import zjut.com.laowuguanli.adapter.MyAdapter;
+import zjut.com.laowuguanli.adapter.MyAdapterL;
 import zjut.com.laowuguanli.bean.User;
 import zjut.com.laowuguanli.db.LoaderDaoImpl;
 
@@ -26,7 +26,7 @@ import zjut.com.laowuguanli.db.LoaderDaoImpl;
 public class SignFragment extends Fragment {
     RecyclerView recyclerView;
     List<User> datas;
-    MyAdapter adapter;
+    MyAdapterL adapter;
     private FloatingActionButton fab;
     ProgressDialog progressDialog;
     LoaderDaoImpl mDao;
@@ -55,9 +55,9 @@ public class SignFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         datas = new ArrayList<User>();
-        adapter = new MyAdapter(getActivity(), datas);
+        adapter = new MyAdapterL(getActivity(), datas);
 
-        adapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new MyAdapterL.OnItemClickListener() {
             @Override
             public void onItemLongClickListener(View itemView, int position) {
                 adapter.deleteItem(position);

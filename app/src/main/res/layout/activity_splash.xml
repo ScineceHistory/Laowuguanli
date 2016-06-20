@@ -38,7 +38,7 @@
             android:textStyle="italic"
             android:textSize="16sp"
             android:gravity="center_horizontal|bottom"
-            android:textColor="#aa303030"
+            android:textColor="#ffffff"
             />
 
         <TextView
@@ -49,7 +49,7 @@
             android:textSize="14sp"
             android:gravity="center_horizontal|top"
             android:text="@string/me"
-            android:textColor="#aa303030"
+            android:textColor="#ffffff"
             android:layout_marginTop="5dp"
             />
     </LinearLayout>
