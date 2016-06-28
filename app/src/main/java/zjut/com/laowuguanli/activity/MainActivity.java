@@ -34,7 +34,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -312,9 +311,7 @@ public class MainActivity extends BaseActivity {
                 //不同item对应不同图片
                 switch (menuItem.getItemId()){
                     case R.id.nav_web:
-                        Uri u = Uri.parse(GROUP_WEB);
-                        Intent it = new Intent(Intent.ACTION_VIEW, u);
-                        startActivity(it);
+                        launcherActivity(GroupWebActivity.class);
                         break;
                     case R.id.nav_profile:
                         goToXinLang(MainActivity.this,MY_WEB);
@@ -360,18 +357,19 @@ public class MainActivity extends BaseActivity {
     }
 
     private void openUsingBrowser(Context context, String url) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (Check.isIntentSafe(browserIntent)) {
-            context.startActivity(browserIntent);
-        } else {
-            Toast.makeText(context, "无浏览器", Toast.LENGTH_SHORT).show();
-        }
+//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//        browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        if (Check.isIntentSafe(browserIntent)) {
+//            context.startActivity(browserIntent);
+//        } else {
+//            Toast.makeText(context, "无浏览器", Toast.LENGTH_SHORT).show();
+//        }
+        launcherActivity(PersonWebActivity.class);
     }
 
     private void openUsingXinLangClient(Context context) {
 
-        Intent intent =getPackageManager().getLaunchIntentForPackage(
+        Intent intent = getPackageManager().getLaunchIntentForPackage(
                 Constants.Information.XINLANG_PACKAGE_ID);
         if (intent != null)
             startActivity(intent);

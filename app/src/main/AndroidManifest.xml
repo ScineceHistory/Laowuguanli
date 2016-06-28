@@ -65,6 +65,11 @@
         <activity android:name=".activity.PrefsActivity"
             android:theme="@style/AppThemeP"/>
 
+        <activity android:name=".activity.GroupWebActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activity.PersonWebActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>
