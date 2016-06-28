@@ -10,16 +10,16 @@
             android:enabled="true"
             android:key="auto_login"
             android:summaryOn="自动登陆"
-            android:title="是否开启自动登陆"
+            android:title="自动登陆／手动登陆"
             android:summaryOff="手动登陆"/>
 
         <CheckBoxPreference
             android:defaultValue="false"
             android:enabled="true"
             android:key="using_xinlang_client?"
-            android:summaryOn="客户端"
-            android:title="新浪微博客户端Or浏览器页面"
-            android:summaryOff="浏览器"/>
+            android:summaryOn="开启"
+            android:title="新浪微博客户端状态"
+            android:summaryOff="关闭"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

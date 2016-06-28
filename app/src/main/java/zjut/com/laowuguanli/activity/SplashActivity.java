@@ -111,7 +111,7 @@ public class SplashActivity extends Activity {
                         Picasso.with(SplashActivity.this).load(splashImage.getImg()).into(mImageView);
                         loadAnimation(mImageView);
 
-                        Typeface face = Typeface.createFromAsset (getAssets() , "fonts/MILT_RG.ttf" );
+                        Typeface face = Typeface.createFromAsset (getAssets() , "fonts/nokia.ttf" );
                         flagTv.setTypeface (face);
                         flagTv.setVisibility(View.VISIBLE);
                         loadAnimation(flagTv);

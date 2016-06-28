@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.toryang.sampledemo.loading.SingleBall
+        android:id="@+id/ball_one"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="50dp"
+        app:single_ball_color="@android:color/holo_green_light"/>
+
+    <com.toryang.sampledemo.loading.SingleBall
+        android:id="@+id/ball_two"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        app:single_ball_color="@android:color/holo_blue_light"/>
+
+    <com.toryang.sampledemo.loading.SingleBall
+        android:id="@+id/ball_three"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        app:single_ball_color="@android:color/holo_orange_light"/>
+
+    <com.toryang.sampledemo.loading.SingleBall
+        android:id="@+id/ball_four"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        app:single_ball_color="@android:color/holo_red_light"/>
+
+    <com.toryang.sampledemo.loading.SingleBall
+        android:id="@+id/ball_five"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="50dp"
+        app:single_ball_color="@android:color/holo_purple"/>
+
+</LinearLayout>

@@ -28,7 +28,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.BounceInterpolator;
+import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity {
     private boolean isNewUser;
 
     boolean isShow = true;
-    public static final int DURATION = 1500;
+    public static final int DURATION = 700;
     private android.view.animation.Interpolator mInterpolator;
 
     private String[] mCustomItems = new String[]{"本地图册", "相机拍照","查看原图"};   // 本地图册、相机选择
@@ -173,7 +173,7 @@ public class MainActivity extends BaseActivity {
         mTextViewDate = (TextView) findViewById(R.id.dates);
         mTextViewTitleFlag = (TextView) findViewById(R.id.title_flag);
 
-        mInterpolator = new BounceInterpolator();
+        mInterpolator = new AnticipateOvershootInterpolator();
 
         fabLaowu= (FloatingActionButton) findViewById(R.id.fab2);
         fabLaowu.setOnClickListener(new View.OnClickListener() {
@@ -348,15 +348,15 @@ public class MainActivity extends BaseActivity {
     private void goToXinLang(Context context, String url) {
         if (!MyApplication.getSharedPreferences()
                 .getBoolean("using_xinlang_client?", false)) {
-            openUsingBrowser(context, url);
+            openUsingWebView(context, url);
         } else if (Check.isXinLangClientInstalled()) {
             openUsingXinLangClient(context);
         } else {
-            openUsingBrowser(context, url);
+            openUsingWebView(context, url);
         }
     }
 
-    private void openUsingBrowser(Context context, String url) {
+    private void openUsingWebView(Context context, String url) {
 //        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 //        browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        if (Check.isIntentSafe(browserIntent)) {
@@ -368,7 +368,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private void openUsingXinLangClient(Context context) {
-
         Intent intent = getPackageManager().getLaunchIntentForPackage(
                 Constants.Information.XINLANG_PACKAGE_ID);
         if (intent != null)

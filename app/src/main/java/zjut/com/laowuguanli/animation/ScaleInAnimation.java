@@ -17,8 +17,8 @@ public class ScaleInAnimation  {
     }
 
     public Animator[] getAnimators(View view) {
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", mFrom, 1.3f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", mFrom, 1.3f);
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", mFrom, 1.34f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", mFrom, 1.34f);
         return new ObjectAnimator[]{
                 scaleX, scaleY
         };
