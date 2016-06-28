@@ -3,37 +3,29 @@ package zjut.com.laowuguanli.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import zjut.com.laowuguanli.R;
-import zjut.com.laowuguanli.adapter.MyAdapterL;
+import zjut.com.laowuguanli.adapter.LaoWuAdapter;
 import zjut.com.laowuguanli.bean.User;
-import zjut.com.laowuguanli.db.LoaderDaoImpl;
+import zjut.com.laowuguanli.db.LoaderDaoImpll;
 import zjut.com.laowuguanli.util.GetUserTask;
 
 public class LaowuActivity extends AdministerActivity {
 
-    MyAdapterL adapter;
-    LoaderDaoImpl mDao;
-    
+    LaoWuAdapter adapter;
+    LoaderDaoImpll mDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +46,15 @@ public class LaowuActivity extends AdministerActivity {
     protected void initViews() {
 
         titleName = "劳务管理";
+        saveFileName = "UserInfo(劳务管理).txt";
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(LaowuActivity.this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         datas = new ArrayList<User>();
-        adapter = new MyAdapterL(LaowuActivity.this, datas);
+        adapter = new LaoWuAdapter(LaowuActivity.this, datas);
 
-        adapter.setOnItemClickListener(new MyAdapterL.OnItemClickListener() {
+        adapter.setOnItemClickListener(new LaoWuAdapter.OnItemClickListener() {
             @Override
             public void onItemLongClickListener(View itemView, int position) {
                 adapter.deleteItem(position);
@@ -75,7 +68,7 @@ public class LaowuActivity extends AdministerActivity {
         progressDialog.setMessage("正在处理中...");
         progressDialog.setCancelable(true);
 
-        mDao = new LoaderDaoImpl(this);
+        mDao = new LoaderDaoImpll(this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,53 +81,9 @@ public class LaowuActivity extends AdministerActivity {
         });
     }
 
-    public void saveUserInfo(final User user) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                File file = new File(Environment
-                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath(), "UserInfo(劳务管理).txt");
-                if (!file.exists()) {
-                    try {
-                        file.createNewFile();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                FileOutputStream fos = null;
-                BufferedWriter write = null;
-                try {
-                    fos = new FileOutputStream(file, true);
-                    write = new BufferedWriter(new OutputStreamWriter(fos));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                try {
-                    Log.d("sh", user.toString());
-                    if (write != null) {
-                        if (isOut) {
-                            write.write("(出)" + user.toString() + "\n\n");
-                        } else {
-                            write.write("(进)" + user.toString() + "\n\n");
-                        }
-                        write.flush();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        if (fos != null) {
-                            fos.close();
-                        }
-                        if (write != null) {
-                            write.close();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+    @Override
+    protected String extraOutputInfo() {
+        return "";
     }
 
     @Override
@@ -144,7 +93,7 @@ public class LaowuActivity extends AdministerActivity {
             if (result.getContents() == null) {
                 showHintInfo("取消扫描");
             } else {
-                String url = result.getContents().toString();
+                String url = result.getContents();
                 GetUserTask task = new GetUserTask(LaowuActivity.this);
                 task.execute(url);
             }
@@ -164,7 +113,6 @@ public class LaowuActivity extends AdministerActivity {
         if (datas.contains(user)) {
             isOut = true;
             Date date = new Date();
-            SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             user.setDate(sFormat.format(date));
             saveUserInfo(user);
             mDao.deleteUser(user.getName());

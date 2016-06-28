@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.facebook.stetho.Stetho;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public final class MyApplication extends Application {
@@ -13,14 +15,17 @@ public final class MyApplication extends Application {
         return applicationContext;
     }
 
-
     @Override
     public void onCreate() {
         super.onCreate();
+        Stetho.initializeWithDefaults(this);
+
         applicationContext = this;
         // 设置全局字体
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/wdcyj.ttf").setFontAttrId(R.attr.fontPath).build());
+                .setDefaultFontPath("fonts/wdcyj.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
 
     }
 

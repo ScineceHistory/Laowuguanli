@@ -62,9 +62,6 @@ public class LoaderDaoImplw implements LoaderDao {
 
     public boolean isExists(String name, String date) {
         SQLiteDatabase db = helper.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("select * from thread_info where url = ? and thread_id = ?",
-//                new String[]{url,thread_id+""});
-
         Cursor cursor = db.query("userinfow",null,
                 "name like ? and date like ?",new String[]{name,date},
                 null,null,null);

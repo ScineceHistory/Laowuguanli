@@ -14,10 +14,10 @@ import zjut.com.laowuguanli.bean.User;
  * Created by ScienceHistory on 16/5/4.
  * 数据访问接口的实现类
  */
-public class LoaderDaoImpl implements LoaderDao {
+public class LoaderDaoImpll implements LoaderDao {
     private SaveUserInfoHelper helper;
 
-    public LoaderDaoImpl(Context mContext) {
+    public LoaderDaoImpll(Context mContext) {
         helper = new SaveUserInfoHelper(mContext);
     }
 

@@ -1,7 +1,6 @@
 package zjut.com.laowuguanli.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by zhangpeng on 16-4-18.
@@ -65,6 +64,6 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return date + "\n" + name;
+        return name + "\n" + date;
     }
 }

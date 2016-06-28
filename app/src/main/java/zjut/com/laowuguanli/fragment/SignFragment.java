@@ -16,20 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zjut.com.laowuguanli.R;
-import zjut.com.laowuguanli.adapter.MyAdapterL;
+import zjut.com.laowuguanli.activity.AdministerActivity;
+import zjut.com.laowuguanli.adapter.LaoWuAdapter;
 import zjut.com.laowuguanli.bean.User;
-import zjut.com.laowuguanli.db.LoaderDaoImpl;
+import zjut.com.laowuguanli.db.LoaderDaoImpll;
 
-/**
- * Created by ScienceHistory on 16/6/5.
- */
 public class SignFragment extends Fragment {
     RecyclerView recyclerView;
     List<User> datas;
-    MyAdapterL adapter;
+    LaoWuAdapter adapter;
     private FloatingActionButton fab;
     ProgressDialog progressDialog;
-    LoaderDaoImpl mDao;
+    LoaderDaoImpll mDao;
     List<User> users;
     public boolean isOut = false;
     View mView;
@@ -55,9 +53,9 @@ public class SignFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         datas = new ArrayList<User>();
-        adapter = new MyAdapterL(getActivity(), datas);
+        adapter = new LaoWuAdapter((AdministerActivity) getActivity(), datas);
 
-        adapter.setOnItemClickListener(new MyAdapterL.OnItemClickListener() {
+        adapter.setOnItemClickListener(new LaoWuAdapter.OnItemClickListener() {
             @Override
             public void onItemLongClickListener(View itemView, int position) {
                 adapter.deleteItem(position);
@@ -71,6 +69,6 @@ public class SignFragment extends Fragment {
         progressDialog.setMessage("正在处理中...");
         progressDialog.setCancelable(true);
 
-        mDao = new LoaderDaoImpl(getActivity());
+        mDao = new LoaderDaoImpll(getActivity());
     }
 }

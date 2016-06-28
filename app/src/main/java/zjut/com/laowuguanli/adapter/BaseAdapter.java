@@ -12,56 +12,52 @@ import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import zjut.com.laowuguanli.R;
-import zjut.com.laowuguanli.activity.LaowuActivity;
+import zjut.com.laowuguanli.activity.AdministerActivity;
 import zjut.com.laowuguanli.activity.UserInfoActivity;
 import zjut.com.laowuguanli.animation.ScaleInAnimator;
 import zjut.com.laowuguanli.bean.User;
-import zjut.com.laowuguanli.db.LoaderDaoImpl;
 
 /**
- * Created by ScienceHistory on 16/5/16.
- * 111
+ * Created by ScienceHistory on 16/6/20.
+ * 适配器基类
  */
-public class MyAdapterL extends RecyclerView.Adapter<MyAdapterL.ViewHolder> {
 
-    Context mContext;
-    LaowuActivity mMainActivity;
-    LoaderDaoImpl mLoaderDao;
-    private int mDuration = 700;
-    private Interpolator mInterpolator = new AnticipateOvershootInterpolator();
-    List<User> mDatas;
+public class BaseAdapter extends  RecyclerView.Adapter<BaseAdapter.MyViewHolder> {
+
+    protected AdministerActivity mActivity;
+    protected List<User> mDatas;
+    protected Context mContext;
+    protected int mDuration = 700;
+    protected Interpolator mInterpolator = new AnticipateOvershootInterpolator();
+
+    public OnItemClickListener mListener;
+
     public interface OnItemClickListener {
         void onItemLongClickListener(View itemView, int position);
     }
-    public OnItemClickListener mListener;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mListener = listener;
     }
 
-
-    public MyAdapterL(Context context, List<User> list) {
-        mContext = context;
-        mDatas = list;
-        mMainActivity = (LaowuActivity) context;
-        mLoaderDao = new LoaderDaoImpl(context);
+    public BaseAdapter(AdministerActivity activity, List<User> datas) {
+        mDatas = datas;
+        mContext = activity;
+        mActivity = activity;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.list_item, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         User user = mDatas.get(position);
         holder.tv_name.setText(user.getDate());
         String[] split = user.getName().split("，");
@@ -69,47 +65,26 @@ public class MyAdapterL extends RecyclerView.Adapter<MyAdapterL.ViewHolder> {
 
         holder.tv_num.setText((position+1)+". "+split[0]);
 
-
         ScaleInAnimator animation = new ScaleInAnimator();
         for (Animator anim : animation.getAnimators(holder.itemView)) {
             anim.setInterpolator(mInterpolator);
             anim.setDuration(mDuration).start();
         }
-
-        if (mListener != null) {
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    mListener.onItemLongClickListener(holder.itemView,holder.getLayoutPosition());
-                    return true;
-                }
-            });
-        }
     }
 
-    public void deleteItem(int pos) {
-        Log.d("SH", ""+pos);
-        mMainActivity.isOut = true;
-        Date date = new Date();
-        SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        mDatas.get(pos).setDate(sFormat.format(date));
-        mMainActivity.saveUserInfo(mDatas.get(pos));
-        mLoaderDao.deleteUser(mDatas.get(pos).getName());
-        mDatas.remove(pos);
-        notifyItemRemoved(pos);
-    }
 
     @Override
     public int getItemCount() {
         return mDatas.size();
     }
 
-    final class ViewHolder extends RecyclerView.ViewHolder {
+
+    protected final class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tv_num;
         TextView tv_name;
 
-        public ViewHolder(View itemView) {
+        public MyViewHolder(View itemView) {
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_num = (TextView) itemView.findViewById(R.id.tv_num);

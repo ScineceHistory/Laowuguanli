@@ -8,20 +8,21 @@ import org.jsoup.nodes.Element;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import zjut.com.laowuguanli.activity.QianzhengActivity;
 import zjut.com.laowuguanli.bean.User;
-import zjut.com.laowuguanli.db.LoaderDaoImpl;
+import zjut.com.laowuguanli.db.LoaderDaoImpll;
 
 
 public class GetUserTaskQ extends AsyncTask<String, Void, User> {
     QianzhengActivity mContext;
-    LoaderDaoImpl mDao;
+    LoaderDaoImpll mDao;
 
     public GetUserTaskQ(QianzhengActivity context) {
         super();
         mContext = context;
-        mDao = new LoaderDaoImpl(mContext);
+        mDao = new LoaderDaoImpll(mContext);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class GetUserTaskQ extends AsyncTask<String, Void, User> {
             user.setPic(pic);
 
             Date date = new Date();
-            SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
             user.setDate(sFormat.format(date));
 
             //mDao.insertUser(user);//插入数据库

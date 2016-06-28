@@ -4,9 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by ScienceHistory on 16/5/16.
- */
 public class SaveUserInfoHelperQ extends SQLiteOpenHelper {
     private static final String CREATE_DB = "create table userinfoq(" +
             "id integer primary key autoincrement," +

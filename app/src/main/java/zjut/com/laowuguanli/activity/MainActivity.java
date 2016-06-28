@@ -20,6 +20,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -334,13 +335,17 @@ public class MainActivity extends BaseActivity {
                         showApacheLicenseDialog();
                         break;
                     case R.id.nav_settings:
-                        Intent intent1 = new Intent(MainActivity.this,PrefsActivity.class);
-                        startActivity(intent1);
+                        launcherActivity(PrefsActivity.class);
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    private void launcherActivity(Class clz) {
+        Intent intent = new Intent(MainActivity.this,clz);
+        startActivity(intent);
     }
 
     private void goToXinLang(Context context, String url) {
@@ -497,9 +502,12 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
-            if((System.currentTimeMillis()-exitTime) > 2000){
+            if((System.currentTimeMillis()-exitTime) > 2000 ){
                 showHintInfo("再按一次退出程序","切换账号");
                 exitTime = System.currentTimeMillis();
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
             } else {
                 System.exit(0);
                 finish();
@@ -509,7 +517,7 @@ public class MainActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    private void showHintInfo(String leftStr,String rightStr) {
+    private void showHintInfo(String leftStr, String rightStr) {
         Snackbar.make(parentLayout,leftStr,Snackbar.LENGTH_LONG)
                 .setActionTextColor(getResources().getColor(R.color.colorAccent))
                 .setAction(rightStr, new View.OnClickListener() {
