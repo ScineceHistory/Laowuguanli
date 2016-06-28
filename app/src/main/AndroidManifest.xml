@@ -66,7 +66,7 @@
             android:theme="@style/AppThemeP"/>
 
         <activity android:name=".activity.GroupWebActivity"
-                  android:theme="@style/AppTheme.NoActionBar"/>
+                  android:theme="@style/GroupTheme"/>
         <activity android:name=".activity.PersonWebActivity"
                   android:theme="@style/AppTheme.NoActionBar"/>
 

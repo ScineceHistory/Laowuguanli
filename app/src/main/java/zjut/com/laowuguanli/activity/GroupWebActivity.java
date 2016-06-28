@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
@@ -28,13 +29,14 @@ public class GroupWebActivity extends BaseActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_group_web);
         init();
+        initActionBar();
 
         settings = webView.getSettings();
         settings.setJavaScriptEnabled(true); //如果访问的页面中有Javascript，则WebView必须设置支持Javascript
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setSupportZoom(true); //支持缩放
         settings.setBuiltInZoomControls(true); //支持手势缩放
-        settings.setDisplayZoomControls(false); //是否显示缩放按钮
+        settings.setDisplayZoomControls(true); //是否显示缩放按钮
 
         // >= 19(SDK4.4)启动硬件加速，否则启动软件加速
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -82,5 +84,22 @@ public class GroupWebActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initActionBar() {
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("公司主页");
     }
 }
