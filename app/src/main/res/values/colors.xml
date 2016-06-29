@@ -12,6 +12,8 @@
     <color name="titlezicolor">#ddd</color>
     <color name="spanTitleColor">#303030</color>
     <color name="userTitleColor">#414141</color>
+    <color name="groupTitleColor">#0089ca</color>
+    <color name="weiboTitleColor">#ffe26b</color>
 
 
     <color name="primary">#607D8B</color>

@@ -24,10 +24,10 @@ public class MyLoading extends LinearLayout {
     private SingleBall cradleBallFive;
 
     private static final int DURATION = 400;
-    private static final int SHAKE_DISTANCE = 2;
+    private static final int SHAKE_DISTANCE = 5;
     private static final float PIVOT_X = 0.5f;
-    private static final float PIVOT_Y = -3f;
-    private static final int DEGREE = 30;
+    private static final float PIVOT_Y = -5f;
+    private static final int DEGREE = 50;
 
     private boolean isStart = false;
 

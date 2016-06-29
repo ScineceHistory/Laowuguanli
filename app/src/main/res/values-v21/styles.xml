@@ -85,5 +85,9 @@
         <item name="colorPrimary">@color/groupTitleColor</item>
     </style>
 
-    <color name="groupTitleColor">#0089ca</color>
+    <style name="WeiBoTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/weiboTitleColor</item>
+    </style>
+
 </resources>
