@@ -9,101 +9,30 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <android.support.design.widget.CoordinatorLayout
+    <RelativeLayout
         android:id="@+id/main_content"
-        android:fitsSystemWindows="false"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#55FFF9C4">
 
-        <RelativeLayout
+
+        <include layout="@layout/title"
+                 android:id="@id/title"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@id/title"
             android:id="@+id/mainLayout"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:background="#55FFF9C4">
-
-            <include layout="@layout/title"
-                     android:id="@id/title"/>
-
-            <LinearLayout
-                android:id="@+id/line1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_marginBottom="200dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/line2"
-                android:layout_alignStart="@+id/line2">
-                <!-- FloatingActonBar-->
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_qr"
-                    app:fabSize="normal"
-                    app:rippleColor="#79BD4C"
-                    android:backgroundTint="@color/qianzhengTitleColor"
-                    android:padding="5dp"
-                    app:elevation="6dp"
-                    app:borderWidth="0dp"
-                    app:pressedTranslationZ="12dp"/>
-
-                <TextView
-                    android:id="@+id/qianzhengTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="签证管理"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/qianzhengTitleColor"
-                    android:layout_marginLeft="20dp"/>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/line2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/line1"
-                android:layout_marginBottom="30dp"
-                android:gravity="center_vertical"
-                android:layout_centerHorizontal="true"
-                android:orientation="horizontal">
-                <!-- FloatingActonBar-->
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_qr"
-                    app:fabSize="normal"
-                    app:rippleColor="#79BD4C"
-                    android:backgroundTint="@color/laowuTitleColor"
-                    app:elevation="6dp"
-                    app:borderWidth="0dp"
-                    app:pressedTranslationZ="12dp"/>
-
-                <TextView
-                    android:id="@+id/laowuTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="劳务管理"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/laowuTitleColor"
-                    android:layout_marginLeft="20dp"/>
-            </LinearLayout>
+            android:gravity="center"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
 
             <LinearLayout
                 android:id="@+id/line3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/line2"
-                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -133,21 +62,90 @@
                     android:layout_marginLeft="20dp"/>
             </LinearLayout>
 
-
-            <Button
-                android:id="@+id/fabDT"
+            <LinearLayout
+                android:id="@+id/line2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hide_time"
-                android:textColor="@color/titleColor"
-                android:background="@drawable/dt_btn_bg"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginBottom="30dp"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <!-- FloatingActonBar-->
 
-        </RelativeLayout>
-    </android.support.design.widget.CoordinatorLayout>
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_qr"
+                    app:fabSize="normal"
+                    app:rippleColor="#79BD4C"
+                    android:backgroundTint="@color/laowuTitleColor"
+                    app:elevation="6dp"
+                    app:borderWidth="0dp"
+                    app:pressedTranslationZ="12dp"/>
+
+                <TextView
+                    android:id="@+id/laowuTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="劳务管理"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/laowuTitleColor"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_gravity="center"
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal">
+                <!-- FloatingActonBar-->
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_qr"
+                    app:fabSize="normal"
+                    app:rippleColor="#79BD4C"
+                    android:backgroundTint="@color/qianzhengTitleColor"
+                    android:padding="5dp"
+                    app:elevation="6dp"
+                    app:borderWidth="0dp"
+                    app:pressedTranslationZ="12dp"/>
+
+                <TextView
+                    android:id="@+id/qianzhengTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="签证管理"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/qianzhengTitleColor"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/fabDT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hide_time"
+            android:textColor="@color/titleColor"
+            android:background="@drawable/dt_btn_bg"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"/>
+    </RelativeLayout>
 
     <!-- 侧滑导航-->
     <android.support.design.widget.NavigationView

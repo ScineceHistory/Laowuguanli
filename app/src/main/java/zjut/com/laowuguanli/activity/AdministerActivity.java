@@ -17,8 +17,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import zjut.com.laowuguanli.bean.User;
 
@@ -38,6 +40,9 @@ public abstract class AdministerActivity extends BaseActivity {
     protected String titleName;
     protected String saveFileName;
     protected SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+
+    protected Map<String,String> mInfoMap = new HashMap<>();
+    protected Map<String,String> mWeiGuiMap = new HashMap<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,9 +91,23 @@ public abstract class AdministerActivity extends BaseActivity {
                     Log.d("sh",user.toString());
                     if (write != null) {
                         if (isOut) {
-                            write.write("(出)"+ splitName(user.toString()) + "\r\n" + user.getDate() + extraOutputInfo() +"\r\n\r\n");
+                            String name = splitName(user.toString());
+                            Log.d("Science", "run: "+name);
+                            Log.d("Science", "run: "+mInfoMap.containsKey(name));
+                            if (mInfoMap.containsKey(name)) {
+                                String allInfo = mInfoMap.get(name) +
+                                        "\r\n" + "出 " + user.getDate() + mWeiGuiMap.get(name) +"\r\n\r\n";
+                                Log.d("Science", "run: "+allInfo);
+                                write.write(allInfo);
+                            }
                         } else {
-                            write.write("(进)"+ splitName(user.toString()) + "\r\n" + user.getDate() + extraOutputInfo() +"\r\n\r\n");
+                            String name = splitName(user.toString());
+                            String weigui = extraOutputInfo();
+                            String info = splitName(user.toString()) + "\r\n" + "进 " + user.getDate();
+                            Log.d("Science",name);
+                            Log.d("Science",info);
+                            mInfoMap.put(name,info);
+                            mWeiGuiMap.put(name,weigui);
                         }
                         write.flush();
                     }
@@ -108,6 +127,12 @@ public abstract class AdministerActivity extends BaseActivity {
                 }
             }
         }).start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 
     private String splitName(String userInfo) {

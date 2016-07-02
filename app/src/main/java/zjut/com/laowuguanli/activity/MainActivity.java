@@ -15,7 +15,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -32,7 +31,6 @@ import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -71,7 +69,7 @@ public class MainActivity extends BaseActivity {
     TextView mTextViewDate;
     TextView mTextViewTitleFlag;
 
-    RelativeLayout parentLayout;
+    LinearLayout parentLayout;
     LinearLayout mLinearLayoutL;
     LinearLayout mLinearLayoutQ;
     LinearLayout mLinearLayoutW;
@@ -83,7 +81,6 @@ public class MainActivity extends BaseActivity {
     private ImageView headerImageView;
 
     private NavigationView navigationView;
-    private CoordinatorLayout mCoordinatorLayout;
     private TextView accountTv;
 
     private SharedPreferences preferences;
@@ -157,13 +154,11 @@ public class MainActivity extends BaseActivity {
 
     private void initViews() {
 
-        parentLayout = (RelativeLayout) findViewById(R.id.mainLayout);
+        parentLayout = (LinearLayout) findViewById(R.id.mainLayout);
         mLinearLayoutL = (LinearLayout) findViewById(R.id.line2);
         mLinearLayoutQ = (LinearLayout) findViewById(R.id.line1);
         mLinearLayoutW = (LinearLayout) findViewById(R.id.line3);
         mLinearLayoutDateTime = (LinearLayout) findViewById(R.id.current_Date_Time);
-
-        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
 
         drawerLayout= (DrawerLayout) findViewById(R.id.drawer_layout);
         imageView= (ImageView) findViewById(R.id.image);

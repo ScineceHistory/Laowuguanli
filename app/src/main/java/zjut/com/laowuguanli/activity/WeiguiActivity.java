@@ -50,7 +50,7 @@ public class WeiguiActivity extends AdministerActivity {
 
     @Override
     protected String extraOutputInfo() {
-        return "，违规类型：" + weiguiInfo;
+        return  "\r\n" + "违规类型：" + weiguiInfo;
     }
 
     @Override
