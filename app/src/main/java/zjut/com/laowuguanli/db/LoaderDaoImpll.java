@@ -16,8 +16,10 @@ import zjut.com.laowuguanli.bean.User;
  */
 public class LoaderDaoImpll implements LoaderDao {
     private SaveUserInfoHelper helper;
+    //private LoaderDaoLog mLoaderDaoLog;
 
     public LoaderDaoImpll(Context mContext) {
+        //mLoaderDaoLog = new LoaderDaoImplLog(mContext);
         helper = new SaveUserInfoHelper(mContext);
     }
 

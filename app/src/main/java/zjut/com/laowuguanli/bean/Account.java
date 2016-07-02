@@ -22,4 +22,9 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return account;
+    }
 }

@@ -108,7 +108,7 @@ public class SignupActivity extends BaseActivity {
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "注册失败", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "注册失败(用户或已存在)", Toast.LENGTH_LONG).show();
         _signupButton.setEnabled(true);
     }
 
@@ -118,6 +118,13 @@ public class SignupActivity extends BaseActivity {
         String name = _nameText.getText().toString();
         //String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
+
+        if (mDaoLog.isExists(name,password)) {
+            _nameText.setError("该用户已存在");
+            valid = false;
+        } else {
+            _nameText.setError(null);
+        }
 
         if (name.isEmpty() || name.length() < 1) {
             _nameText.setError("至少1个字符");
