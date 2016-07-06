@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zjut.com.laowuguanli.R;
-import zjut.com.laowuguanli.activity.AdministerActivity;
+import zjut.com.laowuguanli.activity.LaowuActivity;
 import zjut.com.laowuguanli.adapter.LaoWuAdapter;
 import zjut.com.laowuguanli.bean.User;
 import zjut.com.laowuguanli.db.LoaderDaoImpll;
@@ -53,7 +53,7 @@ public class SignFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         datas = new ArrayList<User>();
-        adapter = new LaoWuAdapter((AdministerActivity) getActivity(), datas);
+        adapter = new LaoWuAdapter((LaowuActivity) getActivity(), datas);
 
         adapter.setOnItemClickListener(new LaoWuAdapter.OnItemClickListener() {
             @Override

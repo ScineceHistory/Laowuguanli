@@ -4,16 +4,16 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class SaveUserInfoHelperW extends SQLiteOpenHelper {
-    private static final String CREATE_DB = "create table userinfow(" +
+public class SaveUserWorkInfoHelperQ extends SQLiteOpenHelper {
+    private static final String CREATE_DB = "create table userworkinfo(" +
             "id integer primary key autoincrement," +
             "name text," +
-            "pic text," +
-            "date text," +
-            "isOut integer)";
+            "inInfo text," +
+            "outInfo text," +
+            "weiguiInfo text)";
 
-    public SaveUserInfoHelperW(Context context) {
-        super(context, "Userw.db", null, 1);
+    public SaveUserWorkInfoHelperQ(Context context) {
+        super(context, "UserWorkInfoQ.db", null, 1);
 
     }
 

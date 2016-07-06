@@ -27,7 +27,6 @@ import zjut.com.laowuguanli.bean.User;
 
 public class BaseAdapter extends  RecyclerView.Adapter<BaseAdapter.MyViewHolder> {
 
-    protected AdministerActivity mActivity;
     protected List<User> mDatas;
     protected Context mContext;
     protected int mDuration = 700;
@@ -46,7 +45,6 @@ public class BaseAdapter extends  RecyclerView.Adapter<BaseAdapter.MyViewHolder>
     public BaseAdapter(AdministerActivity activity, List<User> datas) {
         mDatas = datas;
         mContext = activity;
-        mActivity = activity;
     }
 
     @Override

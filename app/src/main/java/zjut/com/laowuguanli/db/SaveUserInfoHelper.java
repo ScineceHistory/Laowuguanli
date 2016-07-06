@@ -9,7 +9,8 @@ public class SaveUserInfoHelper extends SQLiteOpenHelper {
             "id integer primary key autoincrement," +
             "name text," +
             "pic text," +
-            "date text)";
+            "date text," +
+            "isOut integer)";
 
     public SaveUserInfoHelper(Context context) {
         super(context, "User1.db", null, 1);

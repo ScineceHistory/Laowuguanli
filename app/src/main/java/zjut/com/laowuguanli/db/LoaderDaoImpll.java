@@ -16,10 +16,8 @@ import zjut.com.laowuguanli.bean.User;
  */
 public class LoaderDaoImpll implements LoaderDao {
     private SaveUserInfoHelper helper;
-    //private LoaderDaoLog mLoaderDaoLog;
 
     public LoaderDaoImpll(Context mContext) {
-        //mLoaderDaoLog = new LoaderDaoImplLog(mContext);
         helper = new SaveUserInfoHelper(mContext);
     }
 
@@ -30,6 +28,7 @@ public class LoaderDaoImpll implements LoaderDao {
         values.put("name",user.getName());
         values.put("date",user.getDate());
         values.put("pic",user.getPic());
+        values.put("isOut",user.getIsOut());
         db.insert("userinfo",null,values);
         db.close();//数据库关闭
     }
@@ -45,6 +44,7 @@ public class LoaderDaoImpll implements LoaderDao {
             user.setName(cursor.getString(cursor.getColumnIndex("name")));
             user.setDate(cursor.getString(cursor.getColumnIndex("date")));
             user.setPic(cursor.getString(cursor.getColumnIndex("pic")));
+            user.setIsOut(cursor.getInt(cursor.getColumnIndex("isOut")));
             list.add(user);
         }
         cursor.close();

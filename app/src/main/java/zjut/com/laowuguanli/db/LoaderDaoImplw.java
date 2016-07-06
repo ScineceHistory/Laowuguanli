@@ -44,6 +44,7 @@ public class LoaderDaoImplw implements LoaderDao {
             user.setName(cursor.getString(cursor.getColumnIndex("name")));
             user.setDate(cursor.getString(cursor.getColumnIndex("date")));
             user.setPic(cursor.getString(cursor.getColumnIndex("pic")));
+            user.setIsOut(cursor.getInt(cursor.getColumnIndex("isOut")));
             list.add(user);
         }
         cursor.close();

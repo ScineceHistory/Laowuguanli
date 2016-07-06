@@ -9,10 +9,17 @@ public class User implements Serializable {
     private static final long serialVersionUID = -1757055071420451206L;
 
     String name;
-
     String pic;
-
     String date;
+    int isOut;
+
+    public int getIsOut() {
+        return isOut;
+    }
+
+    public void setIsOut(int isOut) {
+        this.isOut = isOut;
+    }
 
     public String getDate() {
         return date;

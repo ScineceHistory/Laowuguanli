@@ -16,9 +16,6 @@ import butterknife.ButterKnife;
 import zjut.com.laowuguanli.R;
 import zjut.com.laowuguanli.bean.User;
 
-/**
- * Created by ScienceHistory on 16/5/16.
- */
 public class UserInfoActivity extends BaseActivity {
 
     @Bind(R.id.img_pic)

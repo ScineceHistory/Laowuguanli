@@ -22,7 +22,7 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
     public GetUserTask(LaowuActivity context) {
         super();
         mContext = context;
-        mDao = new LoaderDaoImpll(mContext);
+        mDao = new LoaderDaoImpll(mContext );
     }
 
     @Override
@@ -45,6 +45,8 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
             Date date = new Date();
             SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
             user.setDate(sFormat.format(date));
+
+
         } catch (Exception e) {
             return new User();
         }

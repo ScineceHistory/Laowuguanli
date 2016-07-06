@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import zjut.com.laowuguanli.activity.AdministerActivity;
+import zjut.com.laowuguanli.activity.WeiguiActivity;
 import zjut.com.laowuguanli.animation.ScaleInAnimator;
 import zjut.com.laowuguanli.bean.User;
 import zjut.com.laowuguanli.db.LoaderDaoImplw;
@@ -20,10 +20,12 @@ import zjut.com.laowuguanli.db.LoaderDaoImplw;
 public class WeiGuiAdapter extends BaseAdapter {
 
     LoaderDaoImplw mLoaderDao;
+    WeiguiActivity mActivity;
 
-    public WeiGuiAdapter(AdministerActivity activity, List<User> datas) {
+    public WeiGuiAdapter(WeiguiActivity activity, List<User> datas) {
         super(activity, datas);
         mLoaderDao = new LoaderDaoImplw(activity);
+        mActivity = activity;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class WeiGuiAdapter extends BaseAdapter {
 
     public void deleteItem(int pos) {
         Log.d("SH", ""+pos);
-        mActivity.isOut = true;
+        mDatas.get(pos).setIsOut(1);
         Date date = new Date();
         SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         mDatas.get(pos).setDate(sFormat.format(date));
@@ -63,6 +65,7 @@ public class WeiGuiAdapter extends BaseAdapter {
         mLoaderDao.deleteUser(mDatas.get(pos).getName());
         mDatas.remove(pos);
         notifyItemRemoved(pos);
+        notifyDataSetChanged();
     }
 
 }

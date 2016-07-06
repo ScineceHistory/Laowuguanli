@@ -12,17 +12,17 @@ import java.util.Locale;
 
 import zjut.com.laowuguanli.activity.QianzhengActivity;
 import zjut.com.laowuguanli.bean.User;
-import zjut.com.laowuguanli.db.LoaderDaoImpll;
+import zjut.com.laowuguanli.db.LoaderDaoImplq;
 
 
 public class GetUserTaskQ extends AsyncTask<String, Void, User> {
     QianzhengActivity mContext;
-    LoaderDaoImpll mDao;
+    LoaderDaoImplq mDao;
 
     public GetUserTaskQ(QianzhengActivity context) {
         super();
         mContext = context;
-        mDao = new LoaderDaoImpll(mContext);
+        mDao = new LoaderDaoImplq(mContext);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class GetUserTaskQ extends AsyncTask<String, Void, User> {
 
             //mDao.insertUser(user);//插入数据库
         } catch (Exception e) {
-//            mContext.showToast("扫码错误");
+
             return new User();
         }
         return user;

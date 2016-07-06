@@ -29,6 +29,7 @@ public class LoaderDaoImplq implements LoaderDao {
         values.put("name",user.getName());
         values.put("date",user.getDate());
         values.put("pic",user.getPic());
+        values.put("isOut",user.getIsOut());
         db.insert("userinfoq",null,values);
         db.close();//数据库关闭
     }
@@ -44,6 +45,7 @@ public class LoaderDaoImplq implements LoaderDao {
             user.setName(cursor.getString(cursor.getColumnIndex("name")));
             user.setDate(cursor.getString(cursor.getColumnIndex("date")));
             user.setPic(cursor.getString(cursor.getColumnIndex("pic")));
+            user.setIsOut(cursor.getInt(cursor.getColumnIndex("isOut")));
             list.add(user);
         }
         cursor.close();

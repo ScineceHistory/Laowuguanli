@@ -3,6 +3,7 @@ package zjut.com.laowuguanli.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,12 +14,18 @@ import android.view.View;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Date;
 
 import zjut.com.laowuguanli.R;
 import zjut.com.laowuguanli.adapter.QianZhengAdapter;
 import zjut.com.laowuguanli.bean.User;
+import zjut.com.laowuguanli.bean.UserWorkInfo;
+import zjut.com.laowuguanli.db.LoaderDaoImplWorkQ;
 import zjut.com.laowuguanli.db.LoaderDaoImplq;
 import zjut.com.laowuguanli.util.GetUserTaskQ;
 
@@ -27,6 +34,7 @@ public class QianzhengActivity extends AdministerActivity {
 
     QianZhengAdapter adapter;
     LoaderDaoImplq mDao;
+    LoaderDaoImplWorkQ mDaoImplWork;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +51,6 @@ public class QianzhengActivity extends AdministerActivity {
         return R.layout.activity_qianzheng;
     }
 
-    @Override
     protected String extraOutputInfo() {
         return "";
     }
@@ -67,6 +74,7 @@ public class QianzhengActivity extends AdministerActivity {
         progressDialog.setCancelable(true);
 
         mDao = new LoaderDaoImplq(this);
+        mDaoImplWork = new LoaderDaoImplWorkQ(this);
 
         fab= (FloatingActionButton) findViewById(R.id.fabq);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -107,21 +115,99 @@ public class QianzhengActivity extends AdministerActivity {
         }
 
         if (datas.contains(user)) {
-            isOut = true;
-            Date date = new Date();
-            user.setDate(sFormat.format(date));
+            user.setIsOut(1);
             saveUserInfo(user);
             mDao.deleteUser(user.getName());
             datas.remove(user);
         } else {
-            isOut = false;
+            user.setIsOut(0);
             datas.add(user);
             if (!mDao.isExists(user.getName(),user.getDate())) {
                 mDao.insertUser(user);
                 saveUserInfo(user);
             }
         }
+
         adapter.notifyDataSetChanged();
         hiddenDialog();
+    }
+
+    public void saveUserInfo(final User user) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                File file = new File(Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_DOWNLOADS).getAbsolutePath(),saveFileName);
+                if (!file.exists()) {
+                    try {
+                        file.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                FileOutputStream fos = null;
+                BufferedWriter write = null;
+                try {
+                    fos = new FileOutputStream(file,true);
+                    write = new BufferedWriter(new OutputStreamWriter(fos));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    if (write != null) {
+                        if (user.getIsOut() != 0) {
+                            Log.d("Science", "run: "+user.getIsOut());
+                            String name = splitName(user.toString());
+                            UserWorkInfo workInfo = mDaoImplWork.getUser(name);
+                            //isExit = mPreferences.getBoolean("isExit",false);
+                            if (mDaoImplWork.isExists(name)) {
+                                String outInfo = "出 " + user.getDate();
+                                Log.d("Science", "run: ============" + outInfo);
+                                workInfo.setOutInfo(outInfo);
+                                mDaoImplWork.deleteUser(name);
+                                mDaoImplWork.insertUser(workInfo);
+                                write.write(workInfo.toString());
+                                mDaoImplWork.deleteUser(name);
+                            }
+                        } else {
+
+                            Log.d("Science", "run: "+user.getIsOut());
+                            String name = splitName(user.toString());
+                            String weigui = extraOutputInfo();
+                            String inInfo = "进 " + user.getDate();
+                            Log.d("Science", "run: "+inInfo);
+
+                            UserWorkInfo workInfo = new UserWorkInfo();
+                            workInfo.setName(name);
+                            workInfo.setInInfo(inInfo);
+                            workInfo.setWeiguiInfo(weigui);
+                            workInfo.setOutInfo("");
+                            mDaoImplWork.insertUser(workInfo);
+                        }
+                        write.flush();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (fos != null) {
+                            fos.close();
+                        }
+                        if (write != null) {
+                            write.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private String splitName(String userInfo) {
+        String[] fields = userInfo.split("，");
+        return fields[0];
     }
 }

@@ -12,16 +12,16 @@ import java.util.Locale;
 
 import zjut.com.laowuguanli.activity.WeiguiActivity;
 import zjut.com.laowuguanli.bean.User;
-import zjut.com.laowuguanli.db.LoaderDaoImpll;
+import zjut.com.laowuguanli.db.LoaderDaoImplw;
 
 public class GetUserTaskW extends AsyncTask<String, Void, User> {
     WeiguiActivity mContext;
-    LoaderDaoImpll mDao;
+    LoaderDaoImplw mDao;
 
     public GetUserTaskW(WeiguiActivity context) {
         super();
         mContext = context;
-        mDao = new LoaderDaoImpll(mContext);
+        mDao = new LoaderDaoImplw(mContext);
     }
 
     @Override
@@ -45,6 +45,7 @@ public class GetUserTaskW extends AsyncTask<String, Void, User> {
             Date date = new Date();
             SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
             user.setDate(sFormat.format(date));
+
 
             //mDao.insertUser(user);//插入数据库
         } catch (Exception e) {

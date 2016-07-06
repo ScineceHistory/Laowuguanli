@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import zjut.com.laowuguanli.activity.AdministerActivity;
+import zjut.com.laowuguanli.activity.LaowuActivity;
 import zjut.com.laowuguanli.animation.ScaleInAnimator;
 import zjut.com.laowuguanli.bean.User;
 import zjut.com.laowuguanli.db.LoaderDaoImpll;
@@ -16,10 +16,12 @@ import zjut.com.laowuguanli.db.LoaderDaoImpll;
 public class LaoWuAdapter extends BaseAdapter {
 
     LoaderDaoImpll mLoaderDao;
+    LaowuActivity mActivity;
 
-    public LaoWuAdapter(AdministerActivity activity, List<User> datas) {
+    public LaoWuAdapter(LaowuActivity activity, List<User> datas) {
         super(activity, datas);
         mLoaderDao = new LoaderDaoImpll(activity);
+        mActivity = activity;
     }
 
 
@@ -53,7 +55,7 @@ public class LaoWuAdapter extends BaseAdapter {
 
     public void deleteItem(int pos) {
         Log.d("SH", ""+pos);
-        mActivity.isOut = true;
+        mDatas.get(pos).setIsOut(1);
         Date date = new Date();
         SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         mDatas.get(pos).setDate(sFormat.format(date));
@@ -61,5 +63,6 @@ public class LaoWuAdapter extends BaseAdapter {
         mLoaderDao.deleteUser(mDatas.get(pos).getName());
         mDatas.remove(pos);
         notifyItemRemoved(pos);
+        notifyDataSetChanged();
     }
 }
