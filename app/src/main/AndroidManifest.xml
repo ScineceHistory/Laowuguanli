@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -69,6 +70,12 @@
                   android:theme="@style/GroupTheme"/>
         <activity android:name=".activity.PersonWebActivity"
                   android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".activity.GroupActivity"
+                  android:theme="@style/GroupTheme"/>
+
+        <activity android:name=".activity.PictureActivity"
+                  android:theme="@style/AppThemeU"/>
 
     </application>
 

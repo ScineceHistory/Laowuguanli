@@ -93,10 +93,8 @@ public class QianzhengActivity extends AdministerActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Log.d("MainActivity", "Cancelled scan");
                 showHintInfo("取消扫描");
             } else {
-                Log.d("MainActivity", "Scanned");
                 String url = result.getContents();
                 GetUserTaskQ task = new GetUserTaskQ(QianzhengActivity.this);
                 task.execute(url);

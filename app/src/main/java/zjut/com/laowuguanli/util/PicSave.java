@@ -57,10 +57,11 @@ public class PicSave {
         return newPath;
     }
 
-    //创建好文件夹之后就可以保存图片了-->
+    // 创建好文件夹之后就可以保存图片了-->
     public static String saveMyBitmap(String bitName, int percent,Context context,Bitmap bmp) throws IOException {
         String bmpFileName = createSDCardDir(context) + bitName + ".jpg";
         File f = new File(bmpFileName);
+
         f.createNewFile();
         FileOutputStream fOut = null;
         try {
@@ -70,6 +71,7 @@ public class PicSave {
         }
         bmp.compress(Bitmap.CompressFormat.JPEG, percent, fOut);
         try {
+            assert fOut != null;
             fOut.flush();
         } catch (IOException e) {
             e.printStackTrace();

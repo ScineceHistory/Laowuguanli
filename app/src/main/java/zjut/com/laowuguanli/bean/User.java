@@ -65,12 +65,13 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         int result = name.hashCode();
-        result = 31 * result + pic.hashCode();
+        //result = 31 * result + pic.hashCode();
+        result = 31 * result;
         return result;
     }
 
     @Override
     public String toString() {
-        return name + "\n" + date;
+        return name;
     }
 }

@@ -86,7 +86,7 @@ public class SelectPicUtil {
 
     /**默认裁剪输出480*480，比例1:1*/
     public static Intent crop(Uri uri){
-        return crop(uri,480,480,1,1);
+        return crop(uri,960,480,1,1);
     }
     /**
      * 裁剪，例如：输出100*100大小的图片，宽高比例是1:1
