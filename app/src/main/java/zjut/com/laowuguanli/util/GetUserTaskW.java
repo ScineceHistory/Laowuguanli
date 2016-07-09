@@ -32,12 +32,15 @@ public class GetUserTaskW extends AsyncTask<String, Void, User> {
         try {
             doc = Jsoup.connect(strings[0]).get();
 
-            Element element = doc.select(".type_content_show").first().select("img").first();
-            String pic = element.attr("src");
+//            Element element = doc.select(".type_content_show").first().select("img").first();
+//            String pic = element.attr("src");
 
 
             Element nameEle = doc.select(".active_show_des ").first();
             String name = nameEle.text();
+
+            String[] fields = name.split("，");
+            String pic = Constants.baseUrl + fields[0];
 
             user.setName(name);
             user.setPic(pic);

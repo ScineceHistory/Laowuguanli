@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class SaveUserInfoHelper extends SQLiteOpenHelper {
+public class SaveUserInfoHelperL extends SQLiteOpenHelper {
     private static final String CREATE_DB = "create table userinfo(" +
             "id integer primary key autoincrement," +
             "name text," +
@@ -12,8 +12,8 @@ public class SaveUserInfoHelper extends SQLiteOpenHelper {
             "date text," +
             "isOut integer)";
 
-    public SaveUserInfoHelper(Context context) {
-        super(context, "User1.db", null, 1);
+    public SaveUserInfoHelperL(Context context) {
+        super(context, "Userl.db", null, 1);
 
     }
 

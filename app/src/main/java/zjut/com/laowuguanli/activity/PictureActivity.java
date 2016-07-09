@@ -6,12 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import uk.co.senab.photoview.PhotoView;
+import uk.co.senab.photoview.PhotoViewAttacher;
 import zjut.com.laowuguanli.R;
 
 /**
@@ -20,7 +21,9 @@ import zjut.com.laowuguanli.R;
  */
 public class PictureActivity extends AppCompatActivity {
     @Bind(R.id.user_pic)
-    ImageView userPic;
+    PhotoView userPic;
+    PhotoViewAttacher mAttacher;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

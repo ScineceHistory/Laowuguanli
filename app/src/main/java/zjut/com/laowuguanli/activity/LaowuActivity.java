@@ -3,7 +3,6 @@ package zjut.com.laowuguanli.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +26,8 @@ import zjut.com.laowuguanli.bean.User;
 import zjut.com.laowuguanli.bean.UserWorkInfo;
 import zjut.com.laowuguanli.db.LoaderDaoImplWorkL;
 import zjut.com.laowuguanli.db.LoaderDaoImpll;
-import zjut.com.laowuguanli.util.GetUserTask;
+import zjut.com.laowuguanli.util.Constants;
+import zjut.com.laowuguanli.util.GetUserTaskL;
 
 public class LaowuActivity extends AdministerActivity {
 
@@ -104,7 +104,7 @@ public class LaowuActivity extends AdministerActivity {
                 showHintInfo("取消扫描");
             } else {
                 String url = result.getContents();
-                GetUserTask task = new GetUserTask(LaowuActivity.this);
+                GetUserTaskL task = new GetUserTaskL(LaowuActivity.this);
                 task.execute(url);
             }
         } else {
@@ -143,8 +143,11 @@ public class LaowuActivity extends AdministerActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                File file = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_DOWNLOADS).getAbsolutePath(),saveFileName);
+                File dirFile = new File(Constants.GUANLI_DIR);
+                if(!dirFile.exists()){
+                    dirFile.mkdir();
+                }
+                File file = new File(dirFile,saveFileName);
                 if (!file.exists()) {
                     try {
                         file.createNewFile();

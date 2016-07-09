@@ -14,12 +14,12 @@ import zjut.com.laowuguanli.activity.LaowuActivity;
 import zjut.com.laowuguanli.bean.User;
 import zjut.com.laowuguanli.db.LoaderDaoImpll;
 
-public class GetUserTask extends AsyncTask<String, Void, User> {
+public class GetUserTaskL extends AsyncTask<String, Void, User> {
 
     LaowuActivity mContext;
     LoaderDaoImpll mDao;
 
-    public GetUserTask(LaowuActivity context) {
+    public GetUserTaskL(LaowuActivity context) {
         super();
         mContext = context;
         mDao = new LoaderDaoImpll(mContext );
@@ -33,11 +33,14 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
         try {
             doc = Jsoup.connect(strings[0]).get();
 
-            Element element = doc.select(".type_content_show").first().select("img").first();
-            String pic = element.attr("src");
+//            Element element = doc.select(".type_content_show").first().select("img").first();
+//            String pic = element.attr("src");
 
             Element nameEle = doc.select(".active_show_des ").first();
             String name = nameEle.text();
+
+            String[] fields = name.split("，");
+            String pic = Constants.baseUrl + fields[0];
 
             user.setName(name);
             user.setPic(pic);

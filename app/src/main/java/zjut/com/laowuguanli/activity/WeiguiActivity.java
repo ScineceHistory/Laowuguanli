@@ -3,7 +3,6 @@ package zjut.com.laowuguanli.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -29,6 +28,7 @@ import zjut.com.laowuguanli.bean.User;
 import zjut.com.laowuguanli.bean.UserWorkInfo;
 import zjut.com.laowuguanli.db.LoaderDaoImplWorkW;
 import zjut.com.laowuguanli.db.LoaderDaoImplw;
+import zjut.com.laowuguanli.util.Constants;
 import zjut.com.laowuguanli.util.GetUserTaskW;
 
 public class WeiguiActivity extends AdministerActivity {
@@ -152,8 +152,11 @@ public class WeiguiActivity extends AdministerActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                File file = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_DOWNLOADS).getAbsolutePath(),saveFileName);
+                File dirFile = new File(Constants.GUANLI_DIR);
+                if(!dirFile.exists()){
+                    dirFile.mkdir();
+                }
+                File file = new File(dirFile,saveFileName);
                 if (!file.exists()) {
                     try {
                         file.createNewFile();

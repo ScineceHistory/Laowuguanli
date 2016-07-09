@@ -32,7 +32,7 @@ public class URLSpanTel extends URLSpan {
     public void onClick(View widget) {
         Uri uri = Uri.parse(getURL());
         Context context = widget.getContext();
-        Intent intent = new Intent(Intent.ACTION_CALL, uri);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         //intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
         try {
             context.startActivity(intent);

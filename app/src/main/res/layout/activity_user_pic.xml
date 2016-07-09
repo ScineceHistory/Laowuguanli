@@ -7,11 +7,10 @@
               android:gravity="center"
               android:background="#33000000">
 
-    <ImageView
+    <uk.co.senab.photoview.PhotoView
         android:id="@+id/user_pic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:scaleType="fitCenter"/>
+        android:layout_gravity="center"/>
 
 </LinearLayout>
