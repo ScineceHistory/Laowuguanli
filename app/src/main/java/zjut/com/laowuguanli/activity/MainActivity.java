@@ -375,7 +375,7 @@ public class MainActivity extends BaseActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("软件信息");
         builder.setCancelable(false);
-        builder.setMessage("作者 @ScienceHistory\n\n时间 @2016年6月15号\n\n版本 @v1.0" +
+        builder.setMessage("作者 @ScienceHistory\n\n时间 @2016年7月9号\n\n版本 @v2.0" +
                 "\n\n类型 @实用工具\n\n备注 @功能待完善");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override

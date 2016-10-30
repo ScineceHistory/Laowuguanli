@@ -37,6 +37,7 @@ public class SignupActivity extends BaseActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_signup);
+
         ButterKnife.bind(this);
 
         mDaoLog = new LoaderDaoImplLog(SignupActivity.this);

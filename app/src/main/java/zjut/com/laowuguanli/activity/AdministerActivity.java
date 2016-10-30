@@ -50,6 +50,7 @@ public abstract class AdministerActivity extends BaseActivity {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         setContentView(getLayoutResId());
+
         initViews();
         initActionBar();
     }
