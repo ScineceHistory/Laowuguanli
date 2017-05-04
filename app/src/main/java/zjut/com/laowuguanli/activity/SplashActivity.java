@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -29,6 +31,7 @@ import rx.schedulers.Schedulers;
 import zjut.com.laowuguanli.MyService;
 import zjut.com.laowuguanli.R;
 import zjut.com.laowuguanli.animation.ScaleInAnimation;
+import zjut.com.laowuguanli.bean.Creative;
 import zjut.com.laowuguanli.bean.SplashImage;
 import zjut.com.laowuguanli.util.NetworkUtil;
 
@@ -37,7 +40,6 @@ public class SplashActivity extends Activity {
     private ImageView mImageView;
     public MyService service;
     private ProgressBar loading;
-    private TextView fromTv;
     private TextView meTv;
     private TextView flagTv;
     private LinearLayout bottomLL;
@@ -61,7 +63,6 @@ public class SplashActivity extends Activity {
 
         mImageView = (ImageView) findViewById(R.id.spalshImage);
         loading = (ProgressBar) findViewById(R.id.loading);
-        fromTv = (TextView) findViewById(R.id.fromSource);
         meTv = (TextView) findViewById(R.id.meTitle);
         flagTv = (TextView) findViewById(R.id.flag_group);
         bottomLL = (LinearLayout) findViewById(R.id.bottomInfo);
@@ -107,8 +108,9 @@ public class SplashActivity extends Activity {
 
                     @Override
                     public void onNext(final SplashImage splashImage) {
-                        fromTv.setText("图片来源 "+splashImage.getText());
-                        Picasso.with(SplashActivity.this).load(splashImage.getImg()).into(mImageView);
+                        List<Creative> creatives = splashImage.getCreatives();
+                        Creative creative = creatives.get(0);
+                        Picasso.with(SplashActivity.this).load(creative.getUrl()).into(mImageView);
                         loadAnimation(mImageView);
 
                         Typeface face = Typeface.createFromAsset (getAssets() , "fonts/nokia.ttf" );

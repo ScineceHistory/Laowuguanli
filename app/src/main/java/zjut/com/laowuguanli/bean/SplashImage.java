@@ -1,22 +1,16 @@
 package zjut.com.laowuguanli.bean;
 
+import java.util.List;
+
 public class SplashImage {
-    private String text;
-    private String img;
 
-    public String getText() {
-        return text;
+    private List<Creative> creatives;
+
+    public List<Creative> getCreatives() {
+        return creatives;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
+    public void setCreatives(List<Creative> creative) {
+        creatives = creative;
     }
 }

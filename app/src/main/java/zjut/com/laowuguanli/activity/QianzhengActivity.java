@@ -83,6 +83,7 @@ public class QianzhengActivity extends AdministerActivity {
                 IntentIntegrator integrator = new IntentIntegrator(QianzhengActivity.this);
                 integrator.setOrientationLocked(false);
                 integrator.setCaptureActivity(ScanActivity.class);
+                
                 integrator.initiateScan();
             }
         });

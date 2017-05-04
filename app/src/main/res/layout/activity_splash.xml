@@ -32,21 +32,11 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/fromSource"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:textSize="16sp"
-            android:gravity="center_horizontal|bottom"
-            android:textColor="#ffffff"
-            />
-
-        <TextView
             android:id="@+id/meTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:textStyle="italic"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:gravity="center_horizontal|top"
             android:text="@string/me"
             android:textColor="#ffffff"
