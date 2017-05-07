@@ -28,7 +28,7 @@ public class PermissionActivity extends AppCompatActivity {
         ActivityManager.addActivity(this);
     }
 
-    public static void requestPermissions(String[] permissions, OnPermissionListener onPermissionListener) {
+    public static void requestPermission(String[] permissions, OnPermissionListener onPermissionListener) {
 
         mOnPermissionListener = onPermissionListener;
 

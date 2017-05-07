@@ -88,22 +88,24 @@ public class UserInfoActivity extends BaseActivity {
         User user = (User) getIntent().getSerializableExtra("user");
 
         String picUrl = user.getPic();
+        System.out.println(picUrl);
         Glide.with(this).load(picUrl).into(imgPic);
 
         tvName.setMovementMethod(LinkMovementMethod.getInstance());
         String[] split = user.getName().split("，");
         name = split[0];
-        erweimaUrl = Constants.baseUrl + name + "ewm";
+        erweimaUrl = Constants.baseUrl + name + "2"; // ewm=2
+        System.out.println(erweimaUrl);
 
         for (int i = 0; i < split.length; i++) {
             if ((!TextUtils.isEmpty(split[i])) && (i != split.length-1)) {
                 String string = split[i];
                 if (string.startsWith("身份证")) {
-                    displayPicLinkItem(split[i], name , "身份证" , "sfz");
+                    displayPicLinkItem(split[i], name , "身份证" , "1"); // sfz=1
                 } else if (string.startsWith("操作证")) {
-                    displayPicLinkItem(split[i], name , "操作证" , "czz");
+                    displayPicLinkItem(split[i], name , "操作证" , "3"); // czz=3
                 } else if (string.startsWith("合格证")) {
-                    displayPicLinkItem(split[i], name , "合格证" , "hgz");
+                    displayPicLinkItem(split[i], name , "合格证" , "4"); // hgz=4
                 } else if (string.startsWith("手机")) {
                     displayPhoneLinkItem(split[i],"手机");
                 } else if (string.startsWith("队长手机")) {

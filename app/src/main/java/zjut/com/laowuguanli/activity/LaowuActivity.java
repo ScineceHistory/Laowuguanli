@@ -104,6 +104,7 @@ public class LaowuActivity extends AdministerActivity {
                 showHintInfo("取消扫描");
             } else {
                 String url = result.getContents();
+                System.out.println(url);
                 GetUserTaskL task = new GetUserTaskL(LaowuActivity.this);
                 task.execute(url);
             }

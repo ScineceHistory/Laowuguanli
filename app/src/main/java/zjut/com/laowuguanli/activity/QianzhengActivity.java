@@ -26,6 +26,9 @@ import zjut.com.laowuguanli.bean.User;
 import zjut.com.laowuguanli.bean.UserWorkInfo;
 import zjut.com.laowuguanli.db.LoaderDaoImplWorkQ;
 import zjut.com.laowuguanli.db.LoaderDaoImplq;
+import zjut.com.laowuguanli.rplibrary.OnPermissionListener;
+import zjut.com.laowuguanli.rplibrary.PermissionActivity;
+import zjut.com.laowuguanli.rplibrary.RunningPermission;
 import zjut.com.laowuguanli.util.Constants;
 import zjut.com.laowuguanli.util.GetUserTaskQ;
 
@@ -80,11 +83,28 @@ public class QianzhengActivity extends AdministerActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentIntegrator integrator = new IntentIntegrator(QianzhengActivity.this);
-                integrator.setOrientationLocked(false);
-                integrator.setCaptureActivity(ScanActivity.class);
-                
-                integrator.initiateScan();
+                PermissionActivity.requestPermission(new String[] {RunningPermission.CAMERA.CAMERA,
+                        RunningPermission.STORAGE.WRITE_EXTERNAL_STORAGE},
+                        new OnPermissionListener() {
+                    @Override
+                    public void onAllGranted() {
+                        IntentIntegrator integrator = new IntentIntegrator(QianzhengActivity.this);
+                        integrator.setOrientationLocked(false);
+                        integrator.setCaptureActivity(ScanActivity.class);
+                        integrator.initiateScan();
+                        System.out.println("..........");
+                    }
+
+                    @Override
+                    public void onGranted(String permission) {
+
+                    }
+
+                    @Override
+                    public void denied(String[] permissions) {
+
+                    }
+                });
             }
         });
     }
@@ -97,8 +117,10 @@ public class QianzhengActivity extends AdministerActivity {
                 showHintInfo("取消扫描");
             } else {
                 String url = result.getContents();
+                System.out.println(url);
                 GetUserTaskQ task = new GetUserTaskQ(QianzhengActivity.this);
                 task.execute(url);
+                System.out.println("---------------");
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment
