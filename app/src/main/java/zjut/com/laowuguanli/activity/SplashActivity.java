@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,7 +32,7 @@ import rx.schedulers.Schedulers;
 import zjut.com.laowuguanli.MyService;
 import zjut.com.laowuguanli.R;
 import zjut.com.laowuguanli.animation.ScaleInAnimation;
-import zjut.com.laowuguanli.bean.Creative;
+import zjut.com.laowuguanli.bean.Result;
 import zjut.com.laowuguanli.bean.SplashImage;
 import zjut.com.laowuguanli.util.NetworkUtil;
 
@@ -70,7 +71,9 @@ public class SplashActivity extends Activity {
         service = getService();
 
         if (NetworkUtil.isOnline(this)) {
+            System.out.println("====================================");
             loadDataSetLis(service.getSplashImage());
+            System.out.println("+++++++++++++++++++++++++++++++++++++");
         } else {
             mImageView.setImageResource(R.drawable.logo);
             bottomLL.setVisibility(View.VISIBLE);
@@ -81,7 +84,7 @@ public class SplashActivity extends Activity {
     }
 
     public MyService getService() {
-        String baseUrl = "http://news-at.zhihu.com";
+        String baseUrl = "http://gank.io";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -108,9 +111,15 @@ public class SplashActivity extends Activity {
 
                     @Override
                     public void onNext(final SplashImage splashImage) {
-                        List<Creative> creatives = splashImage.getCreatives();
-                        Creative creative = creatives.get(0);
-                        Picasso.with(SplashActivity.this).load(creative.getUrl()).into(mImageView);
+                        List<Result> results = splashImage.getResults();
+                        Result result = results.get(0);
+                        String imageUrl = result.getUrl();
+                        System.out.println("---------------------------"+imageUrl);
+                        if (!TextUtils.isEmpty(imageUrl)) {
+                            Picasso.with(SplashActivity.this).load(imageUrl).into(mImageView);
+                        } else {
+                            Picasso.with(SplashActivity.this).load(R.drawable.logo).into(mImageView);
+                        }
                         loadAnimation(mImageView);
 
                         Typeface face = Typeface.createFromAsset (getAssets() , "fonts/nokia.ttf" );

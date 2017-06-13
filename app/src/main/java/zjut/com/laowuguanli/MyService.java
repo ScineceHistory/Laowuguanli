@@ -6,7 +6,7 @@ import zjut.com.laowuguanli.bean.SplashImage;
 
 public interface MyService {
     //传入id查看详细信息
-    @GET("/api/7/prefetch-launch-images/1080*1920")
+    @GET("/api/data/福利/1/1")
     Observable<SplashImage> getSplashImage();
 
 }

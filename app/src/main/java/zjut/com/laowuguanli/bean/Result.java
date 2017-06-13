@@ -2,11 +2,11 @@ package zjut.com.laowuguanli.bean;
 
 /**
  * 作者 @sh2zqp
- * 时间 @2017年04月21日 15:14
- * 知乎启动页图像，已不用
+ * 时间 @2017年06月12日 23:29
  */
 
-public class Creative {
+public class Result {
+
     private String url;
 
     public String getUrl() {
